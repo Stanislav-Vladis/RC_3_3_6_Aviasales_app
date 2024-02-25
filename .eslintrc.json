@@ -39,6 +39,8 @@
         "max-classes-per-file": "off",
         "arrow-body-style": "off",
         "no-shadow": "off",
-        "import/no-unresolved": "off"
+        "import/no-unresolved": "off",
+        "no-param-reassign": "off",
+        "prefer-default-export": "off"
     }
 }
