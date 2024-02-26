@@ -15,6 +15,7 @@ export default class AviasalesService {
 			const url = `https://aviasales-test-api.kata.academy/tickets?searchId=${searchId}`;
 			let response = await fetch(url);
 
+			console.log(response);
 			while (response.status === 500) response = await fetch(url);
 
 			const json = await response.json();
