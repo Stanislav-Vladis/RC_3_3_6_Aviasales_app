@@ -41,6 +41,7 @@
         "no-shadow": "off",
         "import/no-unresolved": "off",
         "no-param-reassign": "off",
-        "prefer-default-export": "off"
+        "prefer-default-export": "off",
+        "no-underscore-dangle": "off"
     }
 }

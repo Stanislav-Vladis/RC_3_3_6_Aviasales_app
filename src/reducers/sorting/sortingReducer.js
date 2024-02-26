@@ -7,7 +7,7 @@ const getInitialState = () => {
 
 const sortingReducer = createReducer(getInitialState(), (builder) => {
   builder
-    .addCase(sorting, (_, action) => {
+    .addCase(sorting.type, (_, action) => {
       return action.payload;
     });
 });
