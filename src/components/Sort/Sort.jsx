@@ -26,7 +26,13 @@ const Sort = ({ changeSortItem, sortItemChecked }) => {
 		const isItemChecked = id === sortItemChecked ? classes.sort__item_checked : null;
 
 		return (
-			<li className={`${classes.sort__item} ${isItemChecked}`} key={id} id={id} onClick={() => changeSortItem(id)}>
+			<li
+				className={`${classes.sort__item} ${isItemChecked}`}
+				key={id}
+				id={id}
+				onClick={() => changeSortItem(id)}
+				role="presentation"
+			>
 				{name}
 			</li>
 		);
