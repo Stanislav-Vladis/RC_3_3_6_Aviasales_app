@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import PropTypes from "prop-types";
+
 import { changeFilterItem, filtersId } from '../../actions';
 
 import classes from './Filters.module.scss';
@@ -35,11 +35,6 @@ const Filters = ({ changeFilterItem, filtersItemChecked }) => {
 			</div>
 		</section>
 	);
-};
-
-Filters.propTypes = {
-	changeFilterItem: PropTypes.func,
-	filtersItemChecked: PropTypes.array,
 };
 
 const mapStateToProps = ({ tickets }) => ({ filtersItemChecked: tickets.filters });

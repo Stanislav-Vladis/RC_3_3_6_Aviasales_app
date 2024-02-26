@@ -14,12 +14,13 @@ const tickets = (
 	},
 	action
 ) => {
-	let { filteredAndSortedTickets, showingTickets} = state;
-	const {
+	let {
 		filters,
 		sortID,
 		totalTickets,
 		filteredTickets,
+		filteredAndSortedTickets,
+		showingTickets,
 		showingTicketsNumber,
 	} = state;
 
@@ -61,7 +62,7 @@ const tickets = (
 			};
 		}
 		case CHANGE_FILTER_ITEM: {
-			const newState = { ...state };
+			let newState = { ...state };
 			const { id } = action;
 			newState.filters = getFilters(filters, id, filtersId);
 			newState.showingTickets = [];
