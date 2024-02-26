@@ -1,7 +1,9 @@
 export default class AviasalesService {
 	async fetchingSearchId(dispatch, getSearchId, showErrorMessage) {
+		console.log("sjsjsj");
 		try {
 			const response = await fetch('https://aviasales-test-api.kata.academy/search');
+			console.log(response);
 			const json = await response.json();
 			return dispatch(getSearchId(json.searchId));
 		} catch (err) {
@@ -10,6 +12,7 @@ export default class AviasalesService {
 	}
 
 	async fetchingTickets(dispatch, getState, isTicketsLoaded, getTickets, showErrorMessage, fetchTickets) {
+		console.log("sddddd");
 		try {
 			const {searchId} = getState();
 			const url = `https://aviasales-test-api.kata.academy/tickets?searchId=${searchId}`;
