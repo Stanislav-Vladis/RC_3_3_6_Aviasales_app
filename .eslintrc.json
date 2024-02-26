@@ -44,8 +44,6 @@
         "prefer-default-export": "off",
         "no-underscore-dangle": "off",
         "default-param-last": "off",
-        "no-await-in-loop": "off",
-        "click-events-have-key-events": "off",
-        "no-noninteractive-element-interactions": "off"
+        "no-await-in-loop": "off"
     }
 }
