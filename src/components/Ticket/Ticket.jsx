@@ -1,73 +1,23 @@
-import React from 'react';
-import { Row, Col } from 'antd';
+import { formatPrice } from '../../utils/format';
+import TicketInfo from '../TicketInfo/TicketInfo';
 
-import classes from './Ticket.module.scss';
+import style from './Ticket.module.scss';
 
-const Ticket = ({
-	price,
-	airlineLogo,
-	originTo,
-	destinationTo,
-	originTimeTo,
-	destinationTimeTo,
-	durationTo,
-	stopsTo,
-	originBack,
-	destinationBack,
-	originTimeBack,
-	destinationTimeBack,
-	durationBack,
-	stopsBack,
-}) => {
-	const stopsNumber = (stops) => {
-		if (!stops.length) return '0 ПЕРЕСАДОК';
-		const str = stops.length === 1 ? 'ПЕРЕСАДКА' : 'ПЕРЕСАДКИ';
-		return `${stops.length} ${str}`;
-	};
+const Ticket = props => {
+	const { price, carrier } = props;
 
 	return (
-		<div className={classes.ticket}>
-			<Row className={classes.ticket__header}>
-				<Col className={classes.ticket__header_price} span={8}>
-					{price}
-				</Col>
-				<Col span={8} offset={8} className={classes.ticket__header_logo}>
-					<img src={airlineLogo} alt="airline logo" />
-				</Col>
-			</Row>
-			<Row className={classes['ticket__to']}>
-				<Col className={classes['ticket_gray-header']} span={8}>
-					{originTo} - {destinationTo}
-				</Col>
-				<Col className={classes['ticket_gray-header']} span={8}>
-					В ПУТИ
-				</Col>
-				<Col className={classes['ticket_gray-header']} span={8}>
-					{stopsNumber(stopsTo)}
-				</Col>
-				<Col span={8}>
-					{originTimeTo} - {destinationTimeTo}
-				</Col>
-				<Col span={8}>{durationTo}</Col>
-				<Col span={8}>{stopsTo.join(', ')}</Col>
-			</Row>
-			<Row className={classes['ticket__back']}>
-				<Col className={classes['ticket_gray-header']} span={8}>
-					{originBack} - {destinationBack}
-				</Col>
-				<Col className={classes['ticket_gray-header']} span={8}>
-					В ПУТИ
-				</Col>
-				<Col className={classes['ticket_gray-header']} span={8}>
-					{stopsNumber(stopsBack)}
-				</Col>
-				<Col span={8}>
-					{originTimeBack} - {destinationTimeBack}
-				</Col>
-				<Col span={8}>{durationBack}</Col>
-				<Col span={8}>{stopsBack.join(', ')}</Col>
-			</Row>
-		</div>
+		<li className={style.ticket}>
+			<div className={style['ticket__wrapper']}>
+				<div className={style['ticket__header']}>
+					<div className={style['ticket__price']}>{formatPrice(price)}</div>
+					<div className={style['ticket__logo']}>
+						<img src={`https://pics.avs.io/99/36/${carrier}.png`} alt='' />
+					</div>
+				</div>
+				<TicketInfo {...props} />
+			</div>
+		</li>
 	);
 };
 

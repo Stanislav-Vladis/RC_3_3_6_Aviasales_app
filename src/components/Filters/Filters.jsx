@@ -1,42 +1,26 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
-import { changeFilterItem, filtersId } from '../../actions';
+import { setFilter } from '../../store/slices/filters.slice';
+import { filterCheckboxes } from '../../utils/localData';
+import FiltersLabel from '../FiltersLabel/FiltersLabel';
 
-import classes from './Filters.module.scss';
+import style from './Filters.module.scss';
 
-const Filters = ({ changeFilterItem, filtersItemChecked }) => {
-	const filterItemsList = filtersId.map((item) => {
-		const { name, id } = item;
-		const isChecked = Boolean(filtersItemChecked.find((item) => item === id));
-
-		return (
-			<li className={classes.filters__item} key={id}>
-				<input
-					className={classes['filters__item-input']}
-					type="checkbox"
-					name="filters"
-					id={id}
-					onChange={() => changeFilterItem(id)}
-					checked={isChecked}
-				/>
-				<label className={classes['filters__item-label']} htmlFor={id}>
-					{name}
-				</label>
-			</li>
-		);
-	});
+const Filters = () => {
+	const dispatch = useDispatch();
 
 	return (
-		<section className={classes.filters}>
-			<div className={classes.filters__wrapper}>
-				<h2 className={classes.filters__header}>Количество пересадок</h2>
-				<ul className={classes.filters__list}>{filterItemsList}</ul>
-			</div>
-		</section>
+		<aside className={style.filters}>
+			<form className={style['filters__form']}>
+				<div className={style['filters__title']}>Количество пересадок</div>
+				<div className={style['filters__content']}>
+					{filterCheckboxes.map(checkbox => (
+						<FiltersLabel key={checkbox.id} {...checkbox} handleChange={() => dispatch(setFilter({ id: checkbox.id }))} />
+					))}
+				</div>
+			</form>
+		</aside>
 	);
 };
 
-const mapStateToProps = ({ tickets }) => ({ filtersItemChecked: tickets.filters });
-
-export default connect(mapStateToProps, { changeFilterItem })(Filters);
+export default Filters;

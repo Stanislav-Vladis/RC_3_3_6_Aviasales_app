@@ -1,0 +1,39 @@
+.ticket-info-item {
+	display: flex;
+
+	&__item {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		span {
+			display: block;
+			color: #a0b0b9;
+			font-size: 2.4rem;
+			font-weight: 600;
+			line-height: 3.6rem; /* 150% */
+			letter-spacing: 0.1rem;
+			text-transform: uppercase;
+		}
+		strong {
+			font-size: 2.8rem;
+			font-style: normal;
+			font-weight: 600;
+			line-height: 4.2rem; /* 150% */
+		}
+	}
+}
+
+@media (max-width: 48em) {
+	.ticket-info-item {
+		justify-content: space-between;
+		&__item {
+			width: auto;
+			span {
+				font-size: 1.6rem;
+			}
+			strong {
+				font-size: 2.4rem;
+			}
+		}
+	}
+}
