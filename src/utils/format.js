@@ -16,11 +16,8 @@ export function formatMinutesToHoursAndMinutes(minutes) {
 	// Остаток от деления на 60 дает количество оставшихся минут
 	const remainingMinutes = minutes % 60;
 
-	// Формируем строку вида 'ччччччччччччммммммм'
-	const formattedString = `${hours}ч ${remainingMinutes}м`;
-
-	// Возвращаем отформатированную строку
-	return formattedString;
+	// Формируем строку вида 'ччмм'
+	return `${hours}ч ${remainingMinutes}м`;
 }
 
 export function calculateArrivalTime(baseTime, additionalMinutes) {

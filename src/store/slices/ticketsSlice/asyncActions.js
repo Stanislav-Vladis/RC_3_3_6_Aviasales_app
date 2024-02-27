@@ -2,13 +2,23 @@ import axios from 'axios';
 
 import { setCompleted, setError, setItems } from './tickets.slice';
 
-const fetchTickets = () => async dispatch => {
+let searchId = null;
+
+const getSearchId = async () => {
+	if (searchId) {
+		return searchId;
+	}
 	const { data } = await axios.get('https://aviasales-test-api.kata.academy/search');
+	searchId = data.searchId;
+};
+
+const fetchTickets = () => async dispatch => {
 	let tickets = [];
 
 	do {
 		try {
-			const ticketsRequest = await axios.get(`https://aviasales-test-api.kata.academy/tickets?searchId=${data.searchId}`);
+			await getSearchId();
+			const ticketsRequest = await axios.get(`https://aviasales-test-api.kata.academy/tickets?searchId=${searchId}`);
 			tickets = ticketsRequest.data;
 			if (tickets === undefined) {
 				dispatch(setError());
@@ -16,8 +26,7 @@ const fetchTickets = () => async dispatch => {
 			}
 			dispatch(setItems(tickets.tickets));
 		} catch (error) {
-			const statusCode = error.message.match(/\b(\d{3})\b/)[0];
-			if (statusCode < 500) {
+			if (!error.message.includes('500')) {
 				dispatch(setError());
 				break;
 			}

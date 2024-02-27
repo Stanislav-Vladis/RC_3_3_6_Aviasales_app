@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { LoadingOutlined } from '@ant-design/icons';
 import { Alert, Button } from 'antd';
+import shortid from 'shortid';
 
 import sorter from '../../utils/sorter';
 import Ticket from '../Ticket/Ticket';
@@ -17,8 +18,9 @@ const TicketList = () => {
 	const handleClick = () => setCount(prev => (prev += 5));
 
 	const sortedTickets = useMemo(() => sorter(items, sortBy, filterBy), [items, sortBy, filterBy]);
-	const elements = sortedTickets.slice(0, count).map((el, id) => {
-		return <Ticket key={`${id}_${el.price}-${el.carrier}`} {...el} />;
+	const elements = sortedTickets.slice(0, count).map(el => {
+		const ticketId = shortid.generate();
+		return <Ticket key={ticketId} {...el} />;
 	});
 	const sortedList = elements.length > 0 && status !== 'error';
 	const emptyMessage = status !== 'error' && status !== 'loading' ? <Alert message='Рейсов, подходящих под заданные фильтры, не найдено' type='info' showIcon /> : null;
