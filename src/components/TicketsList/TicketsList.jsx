@@ -1,7 +1,7 @@
 import React from 'react';
 import { add, format } from 'date-fns';
 import { connect } from 'react-redux';
-import PropTypes from "prop-types";
+
 import { showNext5Tickets } from '../../actions';
 import Ticket from '../Ticket';
 
@@ -36,7 +36,7 @@ const TicketsList = ({ tickets, showNext5Tickets }) => {
 		const getFlightDuration = (duration) => {
 			const hours = Math.floor(duration / 60);
 			const minutes = duration % 60;
-			return `${hours < 10 ? `0${  hours}` : hours}ч ${minutes < 10 ? `0${  minutes}` : minutes}м`;
+			return `${hours < 10 ? '0' + hours : hours}ч ${minutes < 10 ? '0' + minutes : minutes}м`;
 		};
 
 		const originTimeTo = new Date(segments[0].date);
@@ -78,11 +78,6 @@ const TicketsList = ({ tickets, showNext5Tickets }) => {
 			</div>
 		</div>
 	);
-};
-
-TicketsList.propTypes = {
-	tickets: PropTypes.object,
-	showNext5Tickets: PropTypes.func,
 };
 
 const mapStateToProps = ({ tickets }) => ({ tickets });

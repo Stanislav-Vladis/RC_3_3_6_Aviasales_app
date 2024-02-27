@@ -36,7 +36,7 @@ export const getShowingTickets = (tickets, showingTickets, ticketsNumber, next5T
 
 export const getFilters = (filters, id, filtersId) => {
 	const newFiltersId = filtersId.map((item) => item.id);
-	const itemsId = [...filters];
+	let itemsId = [...filters];
 	const stateHasAllItemsId = itemsId.length === 5;
 
 	if (id === 'all') return stateHasAllItemsId ? [] : newFiltersId;

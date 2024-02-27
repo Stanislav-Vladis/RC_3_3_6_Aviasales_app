@@ -1,6 +1,5 @@
 import React from 'react';
 import { Row, Col } from 'antd';
-import PropTypes from "prop-types";
 
 import classes from './Ticket.module.scss';
 
@@ -36,7 +35,7 @@ const Ticket = ({
 					<img src={airlineLogo} alt="airline logo" />
 				</Col>
 			</Row>
-			<Row className={classes.ticket__to}>
+			<Row className={classes['ticket__to']}>
 				<Col className={classes['ticket_gray-header']} span={8}>
 					{originTo} - {destinationTo}
 				</Col>
@@ -52,7 +51,7 @@ const Ticket = ({
 				<Col span={8}>{durationTo}</Col>
 				<Col span={8}>{stopsTo.join(', ')}</Col>
 			</Row>
-			<Row className={classes.ticket__back}>
+			<Row className={classes['ticket__back']}>
 				<Col className={classes['ticket_gray-header']} span={8}>
 					{originBack} - {destinationBack}
 				</Col>
@@ -70,23 +69,6 @@ const Ticket = ({
 			</Row>
 		</div>
 	);
-};
-
-Ticket.propTypes = {
-	price: PropTypes.string,
-	airlineLogo: PropTypes.string,
-	originTo: PropTypes.string,
-	destinationTo: PropTypes.string,
-	originTimeTo: PropTypes.string,
-	destinationTimeTo: PropTypes.string,
-	durationTo: PropTypes.string,
-	stopsTo: PropTypes.array,
-	originBack: PropTypes.string,
-	destinationBack: PropTypes.string,
-	originTimeBack: PropTypes.string,
-	destinationTimeBack: PropTypes.string,
-	durationBack: PropTypes.string,
-	stopsBack: PropTypes.array,
 };
 
 export default Ticket;
