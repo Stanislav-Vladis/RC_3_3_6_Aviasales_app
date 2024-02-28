@@ -2,12 +2,15 @@ import React, { useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { LoadingOutlined } from '@ant-design/icons';
 import { Alert, Button } from 'antd';
-import shortid from 'shortid';
 
 import sorter from '../../utils/sorter';
 import Ticket from '../Ticket/Ticket';
 
 import style from './TicketList.module.scss';
+
+const buildId = ticket => {
+	return `${ticket.segments[0].date}_${ticket.segments[1].date}_${ticket.price}-${ticket.carrier}`;
+};
 
 const TicketList = () => {
 	const { items, status } = useSelector(state => state.tickets);
@@ -19,8 +22,7 @@ const TicketList = () => {
 
 	const sortedTickets = useMemo(() => sorter(items, sortBy, filterBy), [items, sortBy, filterBy]);
 	const elements = sortedTickets.slice(0, count).map(el => {
-		const ticketId = shortid.generate();
-		return <Ticket key={ticketId} {...el} />;
+		return <Ticket key={buildId(el)} {...el} />;
 	});
 	const sortedList = elements.length > 0 && status !== 'error';
 	const emptyMessage = status !== 'error' && status !== 'loading' ? <Alert message='Рейсов, подходящих под заданные фильтры, не найдено' type='info' showIcon /> : null;
